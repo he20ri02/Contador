@@ -10,13 +10,15 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return const Flexible(
+      child:Scaffold(
       body: Stack(
         children: [
           Fondo(),
           Contenido(),
         ],
       ),
+    ),
     );
   }
 }
@@ -32,41 +34,42 @@ class Contenido extends StatefulWidget {
 class _ContenidoState extends State<Contenido> {
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding:  EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Login',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
+    return const Flexible(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children:  [
+            Text(
+              'Login',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+              ),
             ),
+            SizedBox(
+              height: 5,
             ),
-
-          SizedBox(height: 5,),
-
-          Text(
-            'Welcome to your account',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 10,
-              letterSpacing: 1.5,
+            Text(
+              'Welcome to your account',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 10,
+                letterSpacing: 1.5,
+              ),
             ),
-          ),
-
-          SizedBox(height: 5,),
-
-          Datos(),
-        ],
+            SizedBox(
+              height: 5,
+            ),
+            Datos(),
+          ],
+        ),
       ),
     );
   }
 }
-
 
 //////////Datos usado en contenido///
 
@@ -78,16 +81,15 @@ class Datos extends StatefulWidget {
 }
 
 class _DatosState extends State<Datos> {
-  bool obs=true;
+  bool obs = true;
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Flexible(child:
+    Container(
       padding: const EdgeInsets.all(20),
       //decoracion
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: Colors.white
-      ),
+          borderRadius: BorderRadius.circular(10), color: Colors.white),
       //Se agrega el child
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -100,18 +102,19 @@ class _DatosState extends State<Datos> {
               fontSize: 20,
             ),
           ),
-
-          const SizedBox(height: 5,),
+          const SizedBox(
+            height: 5,
+          ),
           TextFormField(
             keyboardType: TextInputType.emailAddress,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               hintText: 'email@example.com',
-            ), 
+            ),
           ),
-
-          const SizedBox(height: 5,),
-
+          const SizedBox(
+            height: 5,
+          ),
           const Text(
             'Password',
             style: TextStyle(
@@ -120,10 +123,9 @@ class _DatosState extends State<Datos> {
               fontSize: 20,
             ),
           ),
-
-          
-          const SizedBox(height: 5,),
-          
+          const SizedBox(
+            height: 5,
+          ),
           TextFormField(
             obscureText: obs,
             decoration: InputDecoration(
@@ -131,21 +133,20 @@ class _DatosState extends State<Datos> {
               hintText: 'Password here',
               suffixIcon: IconButton(
                 icon: const Icon(Icons.remove_red_eye_outlined),
-                onPressed: () {  
-                  setState( () {
-                    obs == true ? obs = false : obs = true; 
+                onPressed: () {
+                  setState(() {
+                    obs == true ? obs = false : obs = true;
                   });
                 },
               ),
             ),
           ),
-
           const Remember(),
           const SizedBox(),
           const Botones(),
-
         ],
       ),
+    ),
     );
   }
 }
@@ -163,33 +164,24 @@ class _RememberState extends State<Remember> {
   bool valor = false;
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Flexible(
+      child:Row(
       children: [
         Checkbox(
-          value: valor,
-          onChanged: (value) {
-            setState(() {
-              valor == false ? valor=true : valor= false;
-            });
-          }
-          ),
-
-          const Text(
-            'Remember me'
-            ),
-            
-            const Spacer(),
-
-            TextButton(
-              onPressed: (){},
-              child: const Text('Forgot Password')
-              )
-
+            value: valor,
+            onChanged: (value) {
+              setState(() {
+                valor == false ? valor = true : valor = false;
+              });
+            }),
+        const Text('Remember me'),
+        const Spacer(),
+        TextButton(onPressed: () {}, child: const Text('Forgot Password'))
       ],
+    ),
     );
   }
 }
-
 
 ///////////Botones////
 
@@ -198,9 +190,9 @@ class Botones extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Flexible(
+      child: Column(
       children: [
-
         //Boton login
         SizedBox(
           width: double.infinity,
@@ -208,11 +200,9 @@ class Botones extends StatelessWidget {
           child: ElevatedButton(
             onPressed: () {},
             style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(const Color(0xff142047))
-            ),
-            
-            child:
-            const Text(
+                backgroundColor:
+                    MaterialStateProperty.all<Color>(const Color(0xff142047))),
+            child: const Text(
               'Login',
               style: TextStyle(
                 color: Colors.white,
@@ -231,7 +221,7 @@ class Botones extends StatelessWidget {
           style: TextStyle(
             color: Colors.grey,
           ),
-          ),
+        ),
 
         const SizedBox(
           width: double.infinity,
@@ -242,18 +232,15 @@ class Botones extends StatelessWidget {
           width: double.infinity,
           height: 50,
           child: OutlinedButton(
-            onPressed: () {},
-            child:(
-              const Text(
+              onPressed: () {},
+              child: (const Text(
                 'Sign with google',
                 style: TextStyle(
                   color: Color(0xff142047),
                   fontSize: 18,
                 ),
-              )
-            )
-            ),
-        ),//google
+              ))),
+        ), //google
         //Facebook
         const SizedBox(
           width: double.infinity,
@@ -264,42 +251,34 @@ class Botones extends StatelessWidget {
           width: double.infinity,
           height: 50,
           child: OutlinedButton(
-            onPressed: () {},
-            child:(
-              const Text(
+              onPressed: () {},
+              child: (const Text(
                 'Sign with facebook',
                 style: TextStyle(
                   color: Color(0xff142047),
                   fontSize: 18,
                 ),
-              )
-            )
-            ),
-        )//facebook
+              ))),
+        ) //facebook
       ],
+    ),
     );
   }
 }
-
-
-
 
 class Fondo extends StatelessWidget {
   const Fondo({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Flexible(
+      child:Container(
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Colors.blue.shade200,
-            Colors.blue
-          ],
-          begin: Alignment.centerRight,
-          end: Alignment.bottomLeft
-        )
-      ),   
+          gradient: LinearGradient(
+              colors: [Colors.blue.shade200, Colors.blue],
+              begin: Alignment.centerRight,
+              end: Alignment.bottomLeft)),
+    ),
     );
   }
 }
